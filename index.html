@@ -21,7 +21,6 @@
 			var renderer = new Renderer();
 			renderer.setMapSize(20, 20);
 			renderer.setTileSize(65, 65);
-			renderer.setCamera(320 - 32, 320 - 32);
 
 			renderer.setTileDefinition(1, 'media/tile0.png');
 			renderer.setTileDefinition(2, 'media/tile1.png');
@@ -34,6 +33,11 @@
 			renderer.setTileDefinition(8, 'media/tree.png', 64, 64);
 			renderer.setTileDefinition(9, 'media/tree.png', 0, 128);
 			renderer.setTileDefinition(10, 'media/tree.png', 64, 128);
+
+			renderer.setTileDefinition(11, 'media/pipe.png', 0, 0);
+			renderer.setTileDefinition(12, 'media/pipe.png', 64, 0);
+			renderer.setTileDefinition(13, 'media/pipe.png', 0, 64);
+			renderer.setTileDefinition(14, 'media/pipe.png', 64, 64);
 
 			renderer.addLayer([
 				[2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
@@ -61,11 +65,11 @@
 			renderer.addLayer([
 				[0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 5, 6, 0, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 5, 6, 0, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 0],
+				[0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 14, 0],
 				[0, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 13, 14, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -80,7 +84,6 @@
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]);
-
 
 			var keyPressed = {};
 			var cameraX = 0, cameraY = 0;
@@ -107,9 +110,10 @@
 				sprite.setPosition(f[0], f[1]);
 			}
 
+			renderer.setCamera(320 - 32, 320 - 32);
 			$(document).ready(function() {
 				renderer.setViewPort(document.body, 640, 640);
-				setInterval(render, 1);
+				setInterval(render, 0);
 			});
 
 
