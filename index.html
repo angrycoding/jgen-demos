@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>jGen - JavaScript game engine - demo page</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src="https://raw.github.com/angrycoding/jgen/master/src/Timer.js"></script>
+		<script type="text/javascript" src="https://raw.github.com/angrycoding/jgen/master/src/Sprite.js"></script>
+		<script type="text/javascript" src="https://raw.github.com/angrycoding/jgen/master/src/Renderer.js"></script>
 		<style type="text/css">
 			html, body {
 				width: 100%;
@@ -12,32 +15,145 @@
 				position: absolute;
 			}
 		</style>
-		<script type="text/javascript" src="script/jsface.js"></script>
-		<script type="text/javascript" src="script/jquery-1.8.2.min.js"></script>
-		<script type="text/javascript" src="https://raw.github.com/angrycoding/jgen/master/src/Sprite.js"></script>
-		<script type="text/javascript" src="https://raw.github.com/angrycoding/jgen/master/src/Renderer.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+			var DEG_TO_RAD = (180 / Math.PI);
+
+			function rad2deg(angle) {
+				return (angle * this.DEG_TO_RAD);
+			}
+			function deg2rad(angle) {
+				return (angle / this.DEG_TO_RAD);
+			}
+		</script>
+
+		<script type="text/javascript">
+			var PeteSprite = Sprite.bind(this, 42, 70, 'media/sprites/dude.png', {
+				'up': [[3, 172]],
+				'down': [[309, 5]],
+				'left': [[156, 90]],
+				'right': [[360, 174]],
+				'up-right': [[7, 432]],
+				'up-left': [[158, 348]],
+				'down-left': [[313, 264]],
+				'down-right': [[361, 432]],
+				'up-walking': [
+					[207,88],
+					[258,88],
+					[310,88],
+					[360,88],
+					[411,88],
+					[462,88]
+				],
+				'down-left-walking': [
+					[6, 264],
+					[58, 264],
+					[109, 264],
+					[160, 264],
+					[211, 264],
+					[260, 264]
+				],
+				'down-right-walking': [
+					[55, 432],
+					[106, 432],
+					[157, 432],
+					[208, 432],
+					[259, 432],
+					[310, 432]
+				],
+				'up-left-walking': [
+					[362, 264],
+					[413, 264],
+					[464, 264],
+					[5, 348],
+					[56, 348],
+					[107, 348]
+				],
+				'up-right-walking': [
+					[211, 348],
+					[262, 348],
+					[311, 348],
+					[364, 348],
+					[415, 348],
+					[466, 348]
+				],
+				'down-walking': [
+					[3, 5],
+					[54, 5],
+					[105, 4],
+					[156, 5],
+					[207, 5],
+					[258, 4]
+				],
+				'left-walking': [
+					[360, 5],
+					[411, 5],
+					[462, 5],
+					[3, 88],
+					[54, 87],
+					[105, 89]
+				],
+				'right-walking': [
+					[54, 173],
+					[105, 173],
+					[156, 173],
+					[207, 172],
+					[258, 171],
+					[309, 173]
+				]
+			}, {
+				onRotate: function(angle) {
+					switch (rad2deg(angle)) {
+						case -90: this.setState('dir', 'up'); break;
+						case 90: this.setState('dir', 'down'); break;
+						case 0: this.setState('dir', 'right'); break;
+						case 180: this.setState('dir', 'left'); break;
+						case 225: this.setState('dir', 'up-left'); break;
+						case -45: this.setState('dir', 'up-right'); break;
+						case 45: this.setState('dir', 'down-right'); break;
+						case -225: this.setState('dir', 'down-left'); break;
+					}
+				},
+				onStateChange: function(state) {
+					var frame = [state.dir];
+					if (state.walking) frame.push('walking');
+					frame = frame.join('-');
+					this.setFrame(frame);
+				}
+			});
+
+			var sprite = new PeteSprite();
+			sprite.move(50, 378);
+			sprite.rotate(deg2rad(0));
+			sprite.show();
+
+		</script>
+
 		<script type="text/javascript">
 
 			var renderer = new Renderer();
 			renderer.setMapSize(20, 20);
 			renderer.setTileSize(65, 65);
 
-			renderer.setTileDefinition(1, 'media/tile0.png');
-			renderer.setTileDefinition(2, 'media/tile1.png');
-			renderer.setTileDefinition(3, 'media/tile2.png');
-			renderer.setTileDefinition(4, 'media/tile3.png');
+			renderer.setTileDefinition(1, 'media/tiles/tile0.png');
+			renderer.setTileDefinition(2, 'media/tiles/tile1.png');
+			renderer.setTileDefinition(3, 'media/tiles/tile2.png');
+			renderer.setTileDefinition(4, 'media/tiles/tile3.png');
 
-			renderer.setTileDefinition(5, 'media/tree.png', 0, 0);
-			renderer.setTileDefinition(6, 'media/tree.png', 64, 0);
-			renderer.setTileDefinition(7, 'media/tree.png', 0, 64);
-			renderer.setTileDefinition(8, 'media/tree.png', 64, 64);
-			renderer.setTileDefinition(9, 'media/tree.png', 0, 128);
-			renderer.setTileDefinition(10, 'media/tree.png', 64, 128);
+			renderer.setTileDefinition(5, 'media/tiles/tree.png', 0, 0);
+			renderer.setTileDefinition(6, 'media/tiles/tree.png', 64, 0);
+			renderer.setTileDefinition(7, 'media/tiles/tree.png', 0, 64);
+			renderer.setTileDefinition(8, 'media/tiles/tree.png', 64, 64);
+			renderer.setTileDefinition(9, 'media/tiles/tree.png', 0, 128);
+			renderer.setTileDefinition(10, 'media/tiles/tree.png', 64, 128);
 
-			renderer.setTileDefinition(11, 'media/pipe.png', 0, 0);
-			renderer.setTileDefinition(12, 'media/pipe.png', 64, 0);
-			renderer.setTileDefinition(13, 'media/pipe.png', 0, 64);
-			renderer.setTileDefinition(14, 'media/pipe.png', 64, 64);
+			renderer.setTileDefinition(11, 'media/tiles/pipe.png', 0, 0);
+			renderer.setTileDefinition(12, 'media/tiles/pipe.png', 64, 0);
+			renderer.setTileDefinition(13, 'media/tiles/pipe.png', 0, 64);
+			renderer.setTileDefinition(14, 'media/tiles/pipe.png', 64, 64);
 
 			renderer.addLayer([
 				[2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
@@ -59,7 +175,7 @@
 				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
 			]);
 
 			renderer.addLayer([
@@ -85,40 +201,97 @@
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]);
 
-			var keyPressed = {};
-			var cameraX = 0, cameraY = 0;
+		</script>
 
-			$(document).on('keydown', function(event) {
-				keyPressed[event.which] = true;
-			});
+		<script type="text/javascript">
+			var keys = {};
 
-			$(document).on('keyup', function(event) {
-				delete keyPressed[event.which];
-			});
+			var speed = 0.5;
+			var keys = {};
 
-			var sprite = new Sprite(64, 64);
 			renderer.addSprite(sprite);
+			renderer.setViewPort(document.body, 840, 640);
 
-			var step = 2;
+			var cameraX = 0;
+			var cameraY = 0;
+			var cameraWidth = 300;
+			var cameraHeight = 300;
 
-			function render() {
-				if (keyPressed[37]) cameraX -= step;
-				if (keyPressed[38]) cameraY -= step;
-				if (keyPressed[39]) cameraX += step;
-				if (keyPressed[40]) cameraY += step;
-				var f = renderer.render(cameraX, cameraY);
-				sprite.setPosition(f[0], f[1]);
-			}
+			var f = document.createElement('div');
+			f.style.position = 'absolute';
+			f.style.width = cameraWidth + 'px';
+			f.style.height = cameraHeight + 'px';
 
-			renderer.setCamera(420 - 32, 320 - 32);
-			$(document).ready(function() {
-				renderer.setViewPort(document.body, 840, 640);
-				setInterval(render, 0);
+			f.style.top = '348px';
+			f.style.opacity = '0.5';
+			f.style.border = '1px solid red';
+			document.body.appendChild(f);
+
+
+			Timer(function(delta) {
+
+				var angle = null;
+
+				if (keys[37]) {
+					if (keys[40]) angle = -225;
+					else if (keys[38]) angle = 225;
+					else angle = 180;
+				}
+
+				else if (keys[39]) {
+					if (keys[40]) angle = 45;
+					else if (keys[38]) angle = -45;
+					else angle = 0;
+				}
+
+				else if (keys[38]) {
+					angle = -90;
+				}
+
+				else if (keys[40]) {
+					angle = 90;
+				}
+
+				if (angle !== null &&
+					sprite.walk(deg2rad(angle), speed * delta)) {
+					sprite.setState('walking', true);
+				} else sprite.setState('walking', false);
+
+				var spritePos = sprite.getPosition();
+
+				cameraX = Math.max(
+					spritePos[0] + sprite.getWidth() - cameraWidth,
+					Math.min(spritePos[0], cameraX)
+				);
+
+				cameraY = Math.max(
+					spritePos[1] + sprite.getHeight() - cameraHeight,
+					Math.min(spritePos[1], cameraY)
+				);
+
+
+				var offsetLeft = cameraX + cameraWidth / 2 - (840 / 2);
+				var offsetTop = cameraY + cameraHeight / 2 - (640 / 2);
+
+
+				var offset = renderer.render(offsetLeft, offsetTop);
+
+				f.style.top = (cameraY - offset[1]) + 'px';
+				f.style.left = (cameraX - offset[0]) + 'px';
+				sprite.render(offset[0], offset[1]);
+
+
 			});
 
+			document.addEventListener('keydown', function(event) {
+				keys[event.which] = true;
+			});
+
+			document.addEventListener('keyup', function(event) {
+				delete keys[event.which];
+			});
 
 		</script>
-	</head>
-	<body>
+
 	</body>
 </html>
