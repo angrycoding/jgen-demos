@@ -4,9 +4,9 @@ krang({packages: {
 	'@jGen',
 	'@jGen!map!/resources/map.json',
 	'@jGen!sprite!resources/dude.json'
-], function(jGen, Scene, PeteSprite) {
+], function(jGen, Scene, DudeSprite) {
 
-	PeteSprite.event(jGen.Constants.ON_ROTATE, function(sprite, angle) {
+	DudeSprite.event(jGen.Constants.ON_ROTATE, function(sprite, angle) {
 		switch (jGen.Utils.rad2deg(angle)) {
 			case -90: sprite.setProperty('dir', 'up'); break;
 			case 90: sprite.setProperty('dir', 'down'); break;
@@ -19,24 +19,24 @@ krang({packages: {
 		}
 	});
 
-	PeteSprite.event(jGen.Constants.ON_PROPCHANGE, function(sprite, props) {
+	DudeSprite.event(jGen.Constants.ON_PROPCHANGE, function(sprite, props) {
 		var frame = [props.dir];
 		if (props.walking) frame.push('walking');
 		frame = frame.join('-');
 		sprite.setFrame(frame);
 	});
 
-	PeteSprite.event(jGen.Constants.ON_WALKSTART, function(sprite) {
+	DudeSprite.event(jGen.Constants.ON_WALKSTART, function(sprite) {
 		// console.info('ON_WALKSTART');
 		sprite.setProperty('walking', true);
 	});
 
-	PeteSprite.event(jGen.Constants.ON_WALKSTOP, function(sprite) {
+	DudeSprite.event(jGen.Constants.ON_WALKSTOP, function(sprite) {
 		// console.info('ON_WALKSTOP');
 		sprite.setProperty('walking', false);
 	});
 
-	PeteSprite.event(jGen.Constants.ON_COLLIDE, function(sprite) {
+	DudeSprite.event(jGen.Constants.ON_COLLIDE, function(sprite) {
 		console.info('COLLISION');
 	});
 
@@ -44,22 +44,22 @@ krang({packages: {
 
 
 
-	var sprite = new PeteSprite();
+	var sprite = new DudeSprite();
 	sprite.move(50, 378);
 	sprite.rotate(jGen.Utils.deg2rad(0));
 	sprite.show();
 
-	var sprite2 = new PeteSprite();
+	var sprite2 = new DudeSprite();
 	sprite2.move(878, 250);
 	sprite2.rotate(jGen.Utils.deg2rad(180));
 	sprite2.show();
 
-	var sprite3 = new PeteSprite();
+	var sprite3 = new DudeSprite();
 	sprite3.move(178, 50);
 	sprite3.rotate(jGen.Utils.deg2rad(90));
 	sprite3.show();
 
-	var sprite4 = new PeteSprite();
+	var sprite4 = new DudeSprite();
 	sprite4.move(378, 650);
 	sprite4.rotate(jGen.Utils.deg2rad(90));
 	sprite4.show();
