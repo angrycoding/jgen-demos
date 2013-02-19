@@ -2,7 +2,7 @@ krang({packages: {
 	jGen: 'https://raw.github.com/angrycoding/jgen/master/src/jGen'
 }}).require([
 	'@jGen',
-	'@jGen!map!/resources/map.json',
+	'@jGen!map!resources/map.json',
 	'@jGen!sprite!resources/dude.json'
 ], function(jGen, Scene, DudeSprite) {
 
