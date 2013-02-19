@@ -1,0 +1,80 @@
+{
+	"width": 42,
+	"height": 70,
+	"source": "data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7",
+	"source": "sprites/dude.png",
+	"frames": {
+		"up": [[3, 172]],
+		"down": [[309, 5]],
+		"left": [[156, 90]],
+		"right": [[360, 174]],
+		"up-right": [[7, 432]],
+		"up-left": [[158, 348]],
+		"down-left": [[313, 264]],
+		"down-right": [[361, 432]],
+		"up-walking": [
+			[207,88],
+			[258,88],
+			[310,88],
+			[360,88],
+			[411,88],
+			[462,88]
+		],
+		"down-left-walking": [
+			[6, 264],
+			[58, 264],
+			[109, 264],
+			[160, 264],
+			[211, 264],
+			[260, 264]
+		],
+		"down-right-walking": [
+			[55, 432],
+			[106, 432],
+			[157, 432],
+			[208, 432],
+			[259, 432],
+			[310, 432]
+		],
+		"up-left-walking": [
+			[362, 264],
+			[413, 264],
+			[464, 264],
+			[5, 348],
+			[56, 348],
+			[107, 348]
+		],
+		"up-right-walking": [
+			[211, 348],
+			[262, 348],
+			[311, 348],
+			[364, 348],
+			[415, 348],
+			[466, 348]
+		],
+		"down-walking": [
+			[3, 5],
+			[54, 5],
+			[105, 4],
+			[156, 5],
+			[207, 5],
+			[258, 4]
+		],
+		"left-walking": [
+			[360, 5],
+			[411, 5],
+			[462, 5],
+			[3, 88],
+			[54, 87],
+			[105, 89]
+		],
+		"right-walking": [
+			[54, 173],
+			[105, 173],
+			[156, 173],
+			[207, 172],
+			[258, 171],
+			[309, 173]
+		]
+	}
+}
